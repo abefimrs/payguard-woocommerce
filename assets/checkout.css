@@ -1,0 +1,80 @@
+/* PayGuard checkout payment method selector */
+
+.payguard-description {
+    margin-bottom: 12px;
+    color: #555;
+    font-size: 14px;
+}
+
+.payguard-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.payguard-method {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    background: #fff;
+    user-select: none;
+}
+
+.payguard-method:hover {
+    border-color: #aaa;
+    background: #fafafa;
+}
+
+.payguard-method input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    accent-color: #e2136e;
+}
+
+.payguard-method--selected {
+    border-color: #e2136e;
+    background: #fff5f9;
+}
+
+.payguard-method__logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 32px;
+    flex-shrink: 0;
+    min-width: 60px;
+}
+
+.payguard-method__logo img {
+    height: 32px;
+    width: auto;
+    max-width: 60px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Card row — Visa + Mastercard + Amex sit side by side, smaller */
+.payguard-method__logo--card img {
+    height: 24px;
+    max-width: 44px;
+}
+
+.payguard-method__label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    flex: 1;
+}
+
+.payguard-method--selected .payguard-method__label {
+    color: #e2136e;
+}
