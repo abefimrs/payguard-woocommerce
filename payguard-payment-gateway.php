@@ -5,7 +5,7 @@
  * Description: Accept bKash, Nagad, Rocket, Upay, Credit/Debit Card and TAP Wallet via PayGuard — zero commission gateway for Bangladesh.
  * Version:     1.0.0
  * Author:      Md. Sanaullah Asif
- * Author URI:  https://app.sourcemonkey.online
+ * Author URI:  https://github.com/abefimrs
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: payguard-for-woocommerce
