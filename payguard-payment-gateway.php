@@ -1,30 +1,35 @@
 <?php
 /**
- * Plugin Name: PayGuard Payment Gateway
+ * Plugin Name: PayGuard Payment Gateway for WooCommerce
  * Plugin URI:  https://app.sourcemonkey.online
- * Description: Accept bKash, Nagad, TAP and more via PayGuard — zero commission payment gateway for Bangladesh.
+ * Description: Accept bKash, Nagad, Rocket, Upay, Credit/Debit Card and TAP Wallet via PayGuard — zero commission gateway for Bangladesh.
  * Version:     1.0.0
  * Author:      Md. Sanaullah Asif
  * Author URI:  https://app.sourcemonkey.online
  * License:     GPL-2.0+
- * Text Domain: payguard
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: payguard-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 6.0
- * WC tested up to:      8.0
+ * WC tested up to:      9.0
  */
 
-if (! defined('ABSPATH')) {
-    exit;
-}
+if (! defined('ABSPATH')) exit;
 
-define('PAYGUARD_VERSION',     '1.0.0');
-define('PAYGUARD_PLUGIN_DIR',  plugin_dir_path(__FILE__));
-define('PAYGUARD_PLUGIN_URL',  plugin_dir_url(__FILE__));
+define('PAYGUARD_VERSION',    '1.0.0');
+define('PAYGUARD_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('PAYGUARD_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-/**
- * Check WooCommerce is active before loading.
- */
+// Declare block checkout incompatibility
+add_action('before_woocommerce_init', function () {
+    if (class_exists('\Automattic\WooCommerce\Utilities\FeaturesUtil')) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__, false);
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+    }
+});
+
+// Load gateway after WooCommerce is ready
 add_action('plugins_loaded', function () {
     if (! class_exists('WC_Payment_Gateway')) {
         add_action('admin_notices', function () {
@@ -36,29 +41,17 @@ add_action('plugins_loaded', function () {
     require_once PAYGUARD_PLUGIN_DIR . 'includes/class-payguard-gateway.php';
     require_once PAYGUARD_PLUGIN_DIR . 'includes/class-payguard-ipn-handler.php';
 
-    // Register gateway
     add_filter('woocommerce_payment_gateways', function ($gateways) {
         $gateways[] = 'WC_PayGuard_Gateway';
         return $gateways;
     });
 });
 
-/**
- * Register IPN webhook route.
- * URL: /wp-json/payguard/v1/ipn
- */
+// IPN webhook endpoint
 add_action('rest_api_init', function () {
     register_rest_route('payguard/v1', '/ipn', [
         'methods'             => 'POST',
         'callback'            => ['WC_PayGuard_IPN_Handler', 'handle'],
         'permission_callback' => '__return_true',
     ]);
-});
-
-/**
- * Add plugin settings link.
- */
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), function ($links) {
-    $links[] = '<a href="' . admin_url('admin.php?page=wc-settings&tab=checkout&section=payguard') . '">Settings</a>';
-    return $links;
 });
