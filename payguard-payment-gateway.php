@@ -8,7 +8,7 @@
  * Author URI:  https://github.com/abefimrs
  * License:     GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: payguard-for-woocommerce
+ * Text Domain: payguard-payment-gateway-for-woocommerce
  * Domain Path: /languages
  *
  * WC requires at least: 6.0

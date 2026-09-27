@@ -14,15 +14,15 @@ class WC_PayGuard_Gateway extends WC_Payment_Gateway
     {
         $this->id                 = 'payguard';
         $this->has_fields         = false;
-        $this->method_title       = __('PayGuard', 'payguard-for-woocommerce');
-        $this->method_description = __('Accept bKash, Nagad, Rocket and more via PayGuard — zero commission gateway for Bangladesh.', 'payguard-for-woocommerce');
+        $this->method_title       = __('PayGuard', 'payguard-payment-gateway-for-woocommerce');
+        $this->method_description = __('Accept bKash, Nagad, Rocket and more via PayGuard — zero commission gateway for Bangladesh.', 'payguard-payment-gateway-for-woocommerce');
         $this->supports           = ['products', 'refunds'];
 
         $this->init_form_fields();
         $this->init_settings();
 
-        $this->title          = $this->get_option('title', __('PayGuard (bKash / Nagad / Rocket)', 'payguard-for-woocommerce'));
-        $this->description    = $this->get_option('description', __('Pay securely via bKash, Nagad or Rocket. Zero commission.', 'payguard-for-woocommerce'));
+        $this->title          = $this->get_option('title', __('PayGuard (bKash / Nagad / Rocket)', 'payguard-payment-gateway-for-woocommerce'));
+        $this->description    = $this->get_option('description', __('Pay securely via bKash, Nagad or Rocket. Zero commission.', 'payguard-payment-gateway-for-woocommerce'));
         $this->enabled        = $this->get_option('enabled');
         $this->api_key        = $this->get_option('api_key', '');
         $this->base_url       = $this->get_option('base_url', 'https://app.sourcemonkey.online/api/v1');
@@ -40,61 +40,61 @@ class WC_PayGuard_Gateway extends WC_Payment_Gateway
     {
         $this->form_fields = [
             'enabled' => [
-                'title'   => __('Enable/Disable', 'payguard-for-woocommerce'),
+                'title'   => __('Enable/Disable', 'payguard-payment-gateway-for-woocommerce'),
                 'type'    => 'checkbox',
-                'label'   => __('Enable PayGuard Payment Gateway', 'payguard-for-woocommerce'),
+                'label'   => __('Enable PayGuard Payment Gateway', 'payguard-payment-gateway-for-woocommerce'),
                 'default' => 'yes',
             ],
             'title' => [
-                'title'       => __('Title', 'payguard-for-woocommerce'),
+                'title'       => __('Title', 'payguard-payment-gateway-for-woocommerce'),
                 'type'        => 'text',
-                'description' => __('Payment title shown to customer at checkout.', 'payguard-for-woocommerce'),
-                'default'     => __('PayGuard (bKash / Nagad / Rocket)', 'payguard-for-woocommerce'),
+                'description' => __('Payment title shown to customer at checkout.', 'payguard-payment-gateway-for-woocommerce'),
+                'default'     => __('PayGuard (bKash / Nagad / Rocket)', 'payguard-payment-gateway-for-woocommerce'),
                 'desc_tip'    => true,
             ],
             'description' => [
-                'title'       => __('Description', 'payguard-for-woocommerce'),
+                'title'       => __('Description', 'payguard-payment-gateway-for-woocommerce'),
                 'type'        => 'textarea',
-                'description' => __('Description shown to customer at checkout.', 'payguard-for-woocommerce'),
-                'default'     => __('Pay securely via bKash, Nagad or Rocket. Zero commission.', 'payguard-for-woocommerce'),
+                'description' => __('Description shown to customer at checkout.', 'payguard-payment-gateway-for-woocommerce'),
+                'default'     => __('Pay securely via bKash, Nagad or Rocket. Zero commission.', 'payguard-payment-gateway-for-woocommerce'),
             ],
             'api_key' => [
-                'title'       => __('API Key', 'payguard-for-woocommerce'),
+                'title'       => __('API Key', 'payguard-payment-gateway-for-woocommerce'),
                 'type'        => 'password',
-                'description' => __('Your PayGuard API key. Get it from Dashboard → API & Webhooks.', 'payguard-for-woocommerce'),
+                'description' => __('Your PayGuard API key. Get it from Dashboard → API & Webhooks.', 'payguard-payment-gateway-for-woocommerce'),
                 'default'     => '',
                 'desc_tip'    => true,
             ],
             'connection_id' => [
-                'title'       => __('MFS Connection ID', 'payguard-for-woocommerce'),
+                'title'       => __('MFS Connection ID', 'payguard-payment-gateway-for-woocommerce'),
                 'type'        => 'text',
-                'description' => __('Your MFS connection ID from Dashboard → Connections.', 'payguard-for-woocommerce'),
+                'description' => __('Your MFS connection ID from Dashboard → Connections.', 'payguard-payment-gateway-for-woocommerce'),
                 'default'     => '',
                 'desc_tip'    => true,
             ],
             'provider' => [
-                'title'       => __('Default Provider', 'payguard-for-woocommerce'),
+                'title'       => __('Default Provider', 'payguard-payment-gateway-for-woocommerce'),
                 'type'        => 'select',
-                'description' => __('Which payment provider to use.', 'payguard-for-woocommerce'),
+                'description' => __('Which payment provider to use.', 'payguard-payment-gateway-for-woocommerce'),
                 'options'     => [
-                    'bkash'  => __('bKash', 'payguard-for-woocommerce'),
-                    'nagad'  => __('Nagad', 'payguard-for-woocommerce'),
-                    'rocket' => __('Rocket', 'payguard-for-woocommerce'),
-                    'tap'    => __('TAP Wallet', 'payguard-for-woocommerce'),
+                    'bkash'  => __('bKash', 'payguard-payment-gateway-for-woocommerce'),
+                    'nagad'  => __('Nagad', 'payguard-payment-gateway-for-woocommerce'),
+                    'rocket' => __('Rocket', 'payguard-payment-gateway-for-woocommerce'),
+                    'tap'    => __('TAP Wallet', 'payguard-payment-gateway-for-woocommerce'),
                 ],
                 'default' => 'bkash',
             ],
             'webhook_secret' => [
-                'title'       => __('Webhook Secret', 'payguard-for-woocommerce'),
+                'title'       => __('Webhook Secret', 'payguard-payment-gateway-for-woocommerce'),
                 'type'        => 'password',
-                'description' => __('Your webhook secret from Dashboard → Connections → Webhook Secret.', 'payguard-for-woocommerce'),
+                'description' => __('Your webhook secret from Dashboard → Connections → Webhook Secret.', 'payguard-payment-gateway-for-woocommerce'),
                 'default'     => '',
                 'desc_tip'    => true,
             ],
             'base_url' => [
-                'title'       => __('API Base URL', 'payguard-for-woocommerce'),
+                'title'       => __('API Base URL', 'payguard-payment-gateway-for-woocommerce'),
                 'type'        => 'text',
-                'description' => __('PayGuard API URL. Do not change unless instructed.', 'payguard-for-woocommerce'),
+                'description' => __('PayGuard API URL. Do not change unless instructed.', 'payguard-payment-gateway-for-woocommerce'),
                 'default'     => 'https://app.sourcemonkey.online/api/v1',
                 'desc_tip'    => true,
             ],
@@ -130,12 +130,12 @@ class WC_PayGuard_Gateway extends WC_Payment_Gateway
             $order->update_meta_data('_payguard_reference_id',   $reference_id);
             $order->save();
 
-            $order->update_status('pending', __('Awaiting PayGuard payment.', 'payguard-for-woocommerce'));
+            $order->update_status('pending', __('Awaiting PayGuard payment.', 'payguard-payment-gateway-for-woocommerce'));
 
             $checkout_url = $this->initiate_provider_payment($transaction_id);
 
             if (! $checkout_url) {
-                throw new \Exception(esc_html__('Could not get payment URL from PayGuard.', 'payguard-for-woocommerce'));
+                throw new \Exception(esc_html__('Could not get payment URL from PayGuard.', 'payguard-payment-gateway-for-woocommerce'));
             }
 
             wc_reduce_stock_levels($order_id);
@@ -148,7 +148,7 @@ class WC_PayGuard_Gateway extends WC_Payment_Gateway
 
         } catch (\Exception $e) {
             wc_add_notice(
-                esc_html__('Payment error: ', 'payguard-for-woocommerce') . esc_html($e->getMessage()),
+                esc_html__('Payment error: ', 'payguard-payment-gateway-for-woocommerce') . esc_html($e->getMessage()),
                 'error'
             );
             return ['result' => 'failure'];
@@ -199,7 +199,7 @@ class WC_PayGuard_Gateway extends WC_Payment_Gateway
             $order->add_order_note(
                 sprintf(
                     /* translators: %s: refund amount */
-                    esc_html__('PayGuard refund of %s initiated.', 'payguard-for-woocommerce'),
+                    esc_html__('PayGuard refund of %s initiated.', 'payguard-payment-gateway-for-woocommerce'),
                     esc_html(wc_price($amount))
                 )
             );
@@ -234,7 +234,7 @@ class WC_PayGuard_Gateway extends WC_Payment_Gateway
 
         if (is_wp_error($response)) {
             throw new \Exception(
-                esc_html__('PayGuard API error: ', 'payguard-for-woocommerce') .
+                esc_html__('PayGuard API error: ', 'payguard-payment-gateway-for-woocommerce') .
                 esc_html($response->get_error_message())
             );
         }

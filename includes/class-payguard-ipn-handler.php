@@ -68,7 +68,7 @@ class WC_PayGuard_IPN_Handler
                 $order->add_order_note(
                     sprintf(
                         /* translators: 1: PayGuard reference, 2: MFS transaction ID */
-                        esc_html__('PayGuard payment confirmed. Reference: %1$s | MFS TXN: %2$s', 'payguard-for-woocommerce'),
+                        esc_html__('PayGuard payment confirmed. Reference: %1$s | MFS TXN: %2$s', 'payguard-payment-gateway-for-woocommerce'),
                         esc_html($reference_id),
                         esc_html($txn_id)
                     )
@@ -83,7 +83,7 @@ class WC_PayGuard_IPN_Handler
                     'failed',
                     sprintf(
                         /* translators: %s: failure reason */
-                        esc_html__('PayGuard payment failed: %s', 'payguard-for-woocommerce'),
+                        esc_html__('PayGuard payment failed: %s', 'payguard-payment-gateway-for-woocommerce'),
                         esc_html($reason)
                     )
                 );
